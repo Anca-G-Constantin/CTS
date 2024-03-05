@@ -89,3 +89,56 @@ class Square_LSP implements Height, Width{
 
     }
 }
+
+
+//ISP ex 4
+
+public interface Vehicle_withDoors{
+
+    public void fuel();
+    public void openDoors();
+    public void drive();
+    public void stop();
+}
+
+public interface Vehicle_withoutDoors{
+
+    public void fuel();
+    public void drive();
+    public void stop();
+
+}
+
+public class Bike implements  Vehicle_withoutDoors{
+    public void fuel(){...}
+    public void drive(){...}
+    public void stop(){...}
+}
+
+// DIP ex 5
+
+public interface Engine{
+     void start();
+}
+
+public class Car {
+    private Engine engine;
+
+    public Car(Engine e) {
+        engine = e;
+    }
+    public void start() {
+        engine.start();
+    }
+}
+
+public class PetrolEngine implements Engine{
+    @java.lang.Override
+    public void start() {...}
+}
+
+public class DieselEngine implements Engine{
+    @java.lang.Override
+    public void start() {...}
+}
+
