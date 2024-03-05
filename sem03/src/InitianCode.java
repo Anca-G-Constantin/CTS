@@ -1,5 +1,3 @@
-package ro.ase.cts.lab03;
-
 import java.util.ArrayList;
 
 public class Main {

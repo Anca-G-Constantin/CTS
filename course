@@ -1,0 +1,6 @@
+DRY - dont do copy/paste, just implement a function
+bad code: WET = write everything twice
+
+
+use an interfacev and use that interface to make an callback in a class => that way all clases that implement the interface can be used
+when calling a function
