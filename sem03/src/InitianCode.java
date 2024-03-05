@@ -1,35 +1,13 @@
 import java.util.ArrayList;
 
-public class Main {
-
-    public static void main(String[] args) {
-        // write your code here
-        OnlineShop o = new OnlineShop()Shop("Emag", "logo.jpg", new ArrayList<Prod>());
-
-        Product p1 = new Product("Laptop", 3200.5, 1,1, 1123, "");
-        Product p2 = new Product("Frigider", 207.95, 1,2, 1245, "");
-
-        Product p3 = new Product(p1);
-
-        p3.setQuantity(5);
-        p3.setProdName("Paine");
-
-        o.addOrder(p1);
-        o.addOrder(p2);
-
-        o.addOrder(p1);
-        System.out.println(p1.equals(p2));
-    }
-}
-
 class OnlineShop {
     private String onlineShopName;
     private String image;
-    private ArrayList<Prod> products;
+    private ArrayList<Product> products;
 
-    OnlineShop(String name, String img, ArrayList<Prod> products)
+    OnlineShop(String name, String img, ArrayList<Product> products)
     {
-        this.products = new ArrayList<Prod>();
+        this.products = new ArrayList<Product>();
         this.image = img;
         this.onlineShopName = name;
     }
@@ -51,7 +29,7 @@ class OnlineShop {
     }
 
     public String getImage() {
-        return i;
+        return image;
     }
 
     public void setImage(String img) {
@@ -80,13 +58,13 @@ class Product
         this.expiration = exp;
     }
 
-    public Product(Prod p)
+    public Product(Product p)
     {
         this.prodName = p.prodName;
         this.productPrice = p.productPrice;
         this.productType = p.productType;
         this.productCategory = p.productCategory;
-        this.id = p.prodId;
+        this.id = p.id;
     }
 
     public double getProductPrice() {
@@ -113,9 +91,9 @@ class Product
         this.productType = productType;
     }
 
-    public boolean equals(Prod p)
+    public boolean equals(Product p)
     {
-        if(p.id != this.prodId || !p.prodName.equals(this.prodName) ||p.productPrice != this.productPrice ||
+        if(p.id != this.id || !p.prodName.equals(this.prodName) ||p.productPrice != this.productPrice ||
         p.productType != p.productType|| p.productCategory != this.productCategory)
             return false;
         else
@@ -173,20 +151,20 @@ class User
     {
         this.username = user;
         this.id = id;
-        o=new ArrayList<Order>();
-        c=new ArrayList<Order>();
+        orders=new ArrayList<Order>();
+        canceledOrders=new ArrayList<Order>();
     }
 
     public void addO1(Order o)
     {
         if(o.status)
-        this.o.add(o);
+        this.orders.add(o);
     }
 
     public void addO2(Order o)
     {
         if(!o.status)
-        this.c.add(o);
+        this.canceledOrders.add(o);
     }
 }
 
@@ -222,14 +200,12 @@ class Order
     }
 }
 
-class InventoryProduct extends ProductQuantity
-{
+class InventoryProduct implements ProductQuantity {
     private Product product;
 
-    public InventoryP(Product p, int quantity)
+    public InventoryProduct(Product p, int quantity)
     {
         this.product = new Product(p);
-        this.quantity = quantity;
     }
     public Product getProduct() {
         return product;
@@ -239,19 +215,18 @@ class InventoryProduct extends ProductQuantity
         this.product = p;
     }
 
+    @Override
     public int getQuantity() {
-        return quantity;
+        return product.getQuantity();
     }
 
+    @Override
     public void setQuantity(int q) {
-        this.quantity = q;
+        product.setQuantity(q);
     }
+
 }
 
-public interface ProductQuantity {
-    void getQuantity();
-    void setQuantity();
-}
 
 
 
