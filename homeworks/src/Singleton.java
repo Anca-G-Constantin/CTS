@@ -5,6 +5,7 @@
 //There are 2 types of instantiation;
 //-Early Instantiation: creation of instance at load time.
 //-Lazy Instantiation: creation of instance when required.
+
 public class Singleton {
     // Private static instance variable
     private static Singleton instance = null;
